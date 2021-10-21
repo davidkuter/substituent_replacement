@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: substituent-replacement
+Version: 0.1.0
+Summary: Substituent Replacement API
+Home-page: https://github.com/davidkuter/substituent_replacement
+License: CC-BY
+Description: Method to generate derivatives of a molecule based on frequently used R-group transformations
+Platform: UNKNOWN
+Provides-Extra: dev
