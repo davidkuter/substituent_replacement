@@ -4,6 +4,7 @@ from setuptools import find_packages
 # App dependencies to for being imported into other applications.
 app_requirements = [
     'loguru==0.5.*',
+    'numpy==1.18.*',
     'xmltodict==0.12.*',
 ]
 
@@ -14,7 +15,7 @@ dev_requirements = [
     'pytest-mock==3.1.*',
     'pytest-html>=3.1.*',
     'pylint==2.6.*',
-    'ipython==7.14.*',
+    'ipython==7.26.*',
     'tox==3.15.*',
     'pip-tools==6.4.*',
 ]
