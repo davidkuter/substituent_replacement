@@ -1,3 +1,4 @@
+README.md
 setup.py
 src/substituent_replacement/__init__.py
 src/substituent_replacement.egg-info/PKG-INFO
@@ -6,3 +7,4 @@ src/substituent_replacement.egg-info/dependency_links.txt
 src/substituent_replacement.egg-info/not-zip-safe
 src/substituent_replacement.egg-info/requires.txt
 src/substituent_replacement.egg-info/top_level.txt
+src/substituent_replacement/data/__init__.py

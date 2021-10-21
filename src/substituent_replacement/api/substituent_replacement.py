@@ -1,5 +1,6 @@
 import os
 
+from loguru import logger
 from rdkit.Chem import AllChem
 from typing import Union
 
@@ -8,13 +9,6 @@ import substituent_replacement.data as data_path
 from substituent_replacement.models.molecule import Molecule
 from substituent_replacement.models.library import ReplacementLibrary
 from substituent_replacement.utils.utils import draw_molecule
-
-
-IN_FILE = './source_data/top500_R_replacements.xml'
-SMILES_TARGET = "c1cc(ccc1c2c(n(cn2)CC3CC3)c4ccnc(n4)N)F"  # Pat Walters example
-CORE_SMARTS = "n1cncc1"  # Pat Walters example
-OUT_DIR = 'results'
-LEVEL = 1  # Options are 1 and 2
 
 
 def substituent_replacement(target_smiles: str, core_smarts: str, out_folder: str, level: int = 1,
@@ -26,7 +20,7 @@ def substituent_replacement(target_smiles: str, core_smarts: str, out_folder: st
 
     # Load Replacement Database
     if source_path is None:
-        source_path = f'{data_path.__file__}/top500_R_replacements.xml'
+        source_path = data_path.__file__.replace('__init__.py', 'top500_R_replacements.xml')
 
     replacement_library = ReplacementLibrary(xml_path=source_path)
 
@@ -44,6 +38,7 @@ def substituent_replacement(target_smiles: str, core_smarts: str, out_folder: st
 
     # Output
     tsv_out = os.path.join(out_folder, 'derivatives.tsv')
+    logger.info(f'Saving data to: {out_folder}')
     with open(tsv_out, 'w') as w:
         w.write('ID\tSMILES\tNUM_REPLACEMENTS\tSCORE\n')
         for deriv in molecule.derivatives:
@@ -57,8 +52,3 @@ def substituent_replacement(target_smiles: str, core_smarts: str, out_folder: st
                           template=AllChem.MolFromSmarts(core_smarts),
                           out_path=os.path.join(svg_out, f'mol_{deriv.id}.svg'),
                           **kwargs)
-
-
-if __name__ == '__main__':
-    substituent_replacement(source_path=IN_FILE, target_smiles=SMILES_TARGET,
-                            core_smarts=CORE_SMARTS, out_folder=OUT_DIR, level=LEVEL)
